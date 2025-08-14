@@ -1,0 +1,19 @@
+services:
+  techleef-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: techleef-image
+    container_name: techleef-container
+    volumes:
+      - ../meta-techleef-bsp:/build/meta-techleef-bsp
+      - ../meta-techleef-distro:/build/meta-techleef-distro
+      - ../meta-techleef-prj:/build/meta-techleef-prj
+      - ../kas:/build/kas
+      - ../sources:/build/sources
+    networks:
+      - techleef_network
+
+networks:
+  techleef_network:
+    driver: bridge
