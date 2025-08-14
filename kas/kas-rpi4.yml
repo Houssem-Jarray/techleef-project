@@ -1,17 +1,37 @@
 header:
   version: 18
 
-  
 machine: raspberrypi4-64
 distro: poky
+
 repos:
-  
   poky:
     url: "https://git.yoctoproject.org/git/poky"
+    branch: "scarthgap"
     commit: "6f7e929ea6ea557f107c8ccffea69a7d73439591"
     layers:
       meta:
       meta-poky:
       meta-yocto-bsp:
-bblayers_conf_header:
-  meta-custom: |
+
+  meta-raspberrypi:
+    url: "https://git.yoctoproject.org/meta-raspberrypi"
+    branch: "scarthgap"
+    commit: "3afc9728b1f4ba0f5be1af34883d6582966133a1"
+
+  meta-techleef-bsp:
+    path: "../meta-techleef-bsp"
+
+  meta-techleef-distro:
+    path: "../meta-techleef-distro"
+
+  meta-techleef-prj:
+    path: "../meta-techleef-prj"
+
+local_conf_header:
+  shared-cache: |
+    SOURCES = "/home/houssem/Desktop/techleef/projects/techleef-project/sources"
+    DL_DIR ?= "${SOURCES}/downloads"
+    SSTATE_DIR ?= "${SOURCES}/sstate-cache"
+    CONF_VERSION = "2"
+    PATCHRESOLVE = "noop"
