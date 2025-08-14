@@ -1,0 +1,14 @@
+# VSCode settings
+.vscode/
+
+# Yocto build output
+build/
+
+# Cloned Yocto layers
+poky/
+meta-raspberrypi/
+
+# Other temp/cache
+tmp/
+sstate-cache/
+downloads/
