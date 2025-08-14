@@ -1,0 +1,17 @@
+header:
+  version: 18
+
+  
+machine: raspberrypi4-64
+distro: poky
+repos:
+  
+  poky:
+    url: "https://git.yoctoproject.org/git/poky"
+    commit: "6f7e929ea6ea557f107c8ccffea69a7d73439591"
+    layers:
+      meta:
+      meta-poky:
+      meta-yocto-bsp:
+bblayers_conf_header:
+  meta-custom: |
