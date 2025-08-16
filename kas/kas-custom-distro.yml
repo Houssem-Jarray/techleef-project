@@ -1,0 +1,57 @@
+header:
+  version: 18
+
+machine: rpi4b
+distro: techleef
+target:
+  - techleef-image
+
+repos:
+  bitbake:
+    url: "https://git.openembedded.org/bitbake"
+    branch: "2.8"
+    commit: "982645110a19ebb94d519926a4e14c8a2a205cfd"
+    layers:
+      .: excluded
+  
+  openembedded-core:
+    url: "https://git.openembedded.org/openembedded-core"
+    branch: "scarthgap"
+    commit: "f023779af6c0e5c838bdacbd6d9765d1c6740575"
+    layers:
+      meta:
+      # meta-skeleton:
+      # meta-selftest:
+  
+  meta-raspberrypi:
+    url: "https://git.yoctoproject.org/meta-raspberrypi"
+    branch: "scarthgap"
+    commit: "3afc9728b1f4ba0f5be1af34883d6582966133a1"
+
+  meta-techleef-bsp:
+    path: "../meta-techleef-bsp"
+
+  meta-techleef-distro:
+    path: "../meta-techleef-distro"
+
+  meta-techleef-prj:
+    path: "../meta-techleef-prj" 
+
+
+local_conf_header:
+  shared-cache: |
+    SOURCES = "/build/sources"
+    DL_DIR ?= "${SOURCES}/downloads"
+    SSTATE_DIR ?= "${SOURCES}/sstate-cache"
+    CONF_VERSION = "2"
+    PATCHRESOLVE = "noop"
+
+    BB_DISKMON_DIRS ??= "\
+    STOPTASKS,${TMPDIR},1G,100K \
+    STOPTASKS,${DL_DIR},1G,100K \
+    STOPTASKS,${SSTATE_DIR},1G,100K \
+    STOPTASKS,/tmp,100M,100K \
+    HALT,${TMPDIR},100M,1K \
+    HALT,${DL_DIR},100M,1K \
+    HALT,${SSTATE_DIR},100M,1K \
+    HALT,/tmp,10M,1K"
